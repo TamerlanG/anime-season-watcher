@@ -1,0 +1,1 @@
+# anime-season-watcher
