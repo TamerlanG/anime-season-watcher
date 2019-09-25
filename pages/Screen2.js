@@ -1,37 +1,45 @@
 //This Example is for React Navigation 3.+//
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Picker } from 'react-native';
 import Spinner from "./components/Spinner"
-import People from "./components/People";
-
-const ALL_PEOPLE_URL = "https://ghibliapi.herokuapp.com/people";
+import AnimeCard from "./components/AnimeCard";
 
 
-export default class Screen2 extends Component {
+let TODAY_ANIME_URL = "https://api.jikan.moe/v3/schedule";
+
+
+export default class Screen1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: true,
-            people: null,
+            anime: null,
+            date: "monday",
         }
     }
 
+    getDate = () => {
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const index = new Date().getDay();
+        const todayDate = days[index];
+
+        return todayDate;
+    }
+
     fetchData = () => {
-        fetch(ALL_PEOPLE_URL)
+        fetch(TODAY_ANIME_URL)
             .then(response => {
                 return response.json();
             })
             .then(data => {
                 this.setState({
-                    people: data
+                    anime: data,
                 }, () => {
-                    console.log(this.state.people)
                 })
             })
             .done();
     }
-
     componentDidMount = () => {
         this.fetchData();
     }
@@ -43,18 +51,35 @@ export default class Screen2 extends Component {
         )
     }
 
-    renderFilms = () => {
+    handleChange = (date) => {
+        this.setState({
+            date: date,
+        })
+    }
+
+    renderAnime = () => {
+        let date = "sunday";
         return (
             <ScrollView styles={styles.MainContainer}>
-                {this.state.people.map((person, i) => {
+                <Picker selectedValue={this.state.date} onValueChange={this.handleChange}>
+                    <Picker.Item label="Sunday" value="sunday" />
+                    <Picker.Item label="Monday" value="monday" />
+                    <Picker.Item label="Tuesday" value="tuesday" />
+                    <Picker.Item label="Wednesday" value="wednesday" />
+                    <Picker.Item label="Thursday" value="thursday" />
+                    <Picker.Item label="Friday" value="friday" />
+                    <Picker.Item label="Saturaday" value="saturday" />
+
+                </Picker>
+                {this.state.anime[this.state.date].map((show, i) => {
                     return (
                         <View key={i}>
-                            <People
-                                name={person.name}
-                                gender={person.gender}
-                                age={person.age}
-                                eye_color={person.eye_color}
-                                hair_color={person.hair_color} />
+                            <AnimeCard
+                                title={show.title}
+                                image={show.image_url}
+                                description={show.synopsis}
+                                date={show.airing_start}
+                            />
                         </View>
                     )
                 })}
@@ -64,11 +89,11 @@ export default class Screen2 extends Component {
 
 
     render() {
-        if (!this.state.people) {
+        if (!this.state.anime) {
             return this.renderLoadingView();
         }
         else {
-            return this.renderFilms();
+            return this.renderAnime();
         }
     }
 }
