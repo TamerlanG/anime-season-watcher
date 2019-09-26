@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 //import react in our code.
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Spinner from "./components/Spinner"
-import AnimeCardUpcoming from "./components/AnimeCardUpcoming";
+import TopAnimeCard from "./components/TopAnimeCard";
 
 
-let LATER_ANIME_URL = "https://private-anon-f1c3e93e7b-jikan.apiary-proxy.com/v3/season/later";
+let TOP_ANIME_URL = "https://private-anon-02692d3c1d-jikan.apiary-proxy.com/v3/top/anime/1/bypopularity";
 
 
-export default class Screen4 extends Component {
+export default class Screen6 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +19,7 @@ export default class Screen4 extends Component {
     }
 
     fetchData = () => {
-        fetch(LATER_ANIME_URL)
+        fetch(TOP_ANIME_URL)
             .then(response => {
                 return response.json();
             })
@@ -45,14 +45,17 @@ export default class Screen4 extends Component {
     renderAnime = () => {
         return (
             <ScrollView styles={styles.MainContainer}>
-                {this.state.anime.anime.slice(0, 15).map((show, i) => {
+                {this.state.anime.top.splice(0, 30).map((show, i) => {
                     return (
                         <View key={i}>
-                            <AnimeCardUpcoming
+                            <TopAnimeCard
                                 title={show.title}
                                 image={show.image_url}
-                                description={show.synopsis}
-                                source={show.source}
+                                rank={show.rank}
+                                start={show.start_date}
+                                end={show.end_date}
+                                score={show.score}
+                                type={show.type}
                             />
                         </View>
                     )

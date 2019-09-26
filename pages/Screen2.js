@@ -9,7 +9,7 @@ import AnimeCard from "./components/AnimeCard";
 let TODAY_ANIME_URL = "https://api.jikan.moe/v3/schedule";
 
 
-export default class Screen1 extends Component {
+export default class Screen2 extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -29,6 +29,9 @@ import Screen2 from './pages/Screen2';
 import Screen3 from './pages/Screen3';
 import Screen4 from './pages/Screen4';
 import Screen5 from './pages/Screen5';
+import Screen6 from './pages/Screen6';
+import Screen7 from './pages/Screen7';
+import Genre from './pages/components/Genre';
 
 //Import Custom Sidebar
 import CustomSidebarMenu from './CustomSideBarMenu';
@@ -109,7 +112,7 @@ const Screen3_StackNavigator = createStackNavigator({
 //Stack Navigator for the Fourth Option of Navigation Drawer
 const Screen4_StackNavigator = createStackNavigator({
   //All the screen from the Fourth Option will be indexed here
-  Third: {
+  Fourth: {
     screen: Screen4,
     navigationOptions: ({ navigation }) => ({
       title: 'Upcoming',
@@ -121,11 +124,40 @@ const Screen4_StackNavigator = createStackNavigator({
     }),
   },
 });
-
+//Stack Navigator for the Fourth Option of Navigation Drawer
+const Screen6_StackNavigator = createStackNavigator({
+  //All the screen from the Fourth Option will be indexed here
+  Fourth: {
+    screen: Screen6,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Top 30 Most Popular Anime',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+//Stack Navigator for the Seventh Option of Navigation Drawer
+const Screen7_StackNavigator = createStackNavigator({
+  //All the screen from the Fourth Option will be indexed here
+  Fourth: {
+    screen: Screen7,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Search Anime',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
 //Stack Navigator for the Fifth Option of Navigation Drawer
 const Screen5_StackNavigator = createStackNavigator({
   //All the screen from the Fifth Option will be indexed here
-  Third: {
+  First: {
     screen: Screen5,
     navigationOptions: ({ navigation }) => ({
       title: 'Genre',
@@ -136,6 +168,18 @@ const Screen5_StackNavigator = createStackNavigator({
       headerTintColor: '#fff',
     }),
   },
+
+  Second: {
+    screen: Genre,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  }
+
 });
 
 //Drawer Navigator Which will provide the structure of our App
@@ -145,31 +189,43 @@ const DrawerNavigatorExample = createDrawerNavigator(
     NavScreen1: {
       screen: FirstActivity_StackNavigator,
       navigationOptions: {
-        drawerLabel: 'Current Season',
+        drawerLabel: 'Today',
       },
     },
     NavScreen2: {
       screen: Screen2_StackNavigator,
       navigationOptions: {
-        drawerLabel: 'People',
+        drawerLabel: 'Week',
       },
     },
     NavScreen3: {
       screen: Screen3_StackNavigator,
       navigationOptions: {
-        drawerLabel: 'Locations',
+        drawerLabel: 'Season',
       },
     },
     NavScreen4: {
       screen: Screen4_StackNavigator,
       navigationOptions: {
-        drawerLabel: 'Species',
+        drawerLabel: 'Upcoming',
       },
     },
     NavScreen5: {
       screen: Screen5_StackNavigator,
       navigationOptions: {
-        drawerLabel: 'Vehicles',
+        drawerLabel: 'Genre',
+      },
+    },
+    NavScreen6: {
+      screen: Screen6_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Top',
+      },
+    },
+    NavScreen7: {
+      screen: Screen7_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Search',
       },
     },
   },

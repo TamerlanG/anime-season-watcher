@@ -1,85 +1,62 @@
-//This Example is for React Navigation 3.+//
 import React, { Component } from 'react';
-//import react in our code.
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import Spinner from "./components/Spinner"
-import VehicleCard from "./components/VehicleCard";
-
-const ALL_VEHICLES_URL = "https://ghibliapi.herokuapp.com/vehicles";
+import { Button, Container, ListItem } from 'react-native-elements';
 
 
 export default class Screen5 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true,
-            vehicles: null,
+
+            genreList: [
+                "Action", "Adventure", "Cars", "Comedy", "Dementia", "Demons", "Mystery", "Drama", "Ecchi", "Fantasy",
+                "Game", "Hentai", "Historical", "Horror", "Kids", "Magic", "Martial Arts", "Mecha", "Music", "Parody",
+                "Samurai", "Romance", "School", "Sci Fi", "Shoujo", "Shounen", "Shounen Ai", "Space", "Sports",
+                "Super Power", "Vampire", "Yaoi", "Yuri", "Harem", "Slice Of Life", "Supernatural", "Military", "Police", "Psychological",
+                "Thriller", "Seinen", "Josei"],
         }
     }
 
-    fetchData = () => {
-        fetch(ALL_VEHICLES_URL)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.setState({
-                    vehicles: data
-                }, () => {
-                    console.log(this.state.vehicles)
-                })
-            })
-            .done();
-    }
+
 
     componentDidMount = () => {
-        this.fetchData();
-    }
-    renderLoadingView = () => {
-        return (
-            <View style={styles.MainContainer}>
-                <Spinner />
-            </View>
-        )
+
     }
 
-    renderFilms = () => {
+    handlePress = (genre) => {
+        console.log(genre.key);
+    }
+
+    static navigationOptions =
+        {
+            title: 'MainActivity',
+        };
+
+    render() {
         return (
-            <ScrollView styles={styles.MainContainer}>
-                {this.state.vehicles.map((vehicle, i) => {
+            <ScrollView>
+                {this.state.genreList.map((genre, i) => {
                     return (
-                        <View key={i}>
-                            <VehicleCard
-                                name={vehicle.name}
-                                description={vehicle.description}
-                                vehicle_class={vehicle.vehicle_class}
-                                length={vehicle.length}
-                            />
-                        </View>
+                        <ListItem
+                            key={i}
+                            title={genre}
+                            genre={genre}
+                            bottomDivider
+                            onPress={() => {
+                                let genreType = genre
+                                this.props.navigation.navigate('Second', { name: genreType });
+                            }}
+                        />
                     )
                 })}
             </ScrollView>
         )
-    }
-
-
-    render() {
-        if (!this.state.vehicles) {
-            return this.renderLoadingView();
-        }
-        else {
-            return this.renderFilms();
-        }
     }
 }
 
 
 const styles = StyleSheet.create({
     MainContainer: {
-        flex: 1,
-        paddingTop: 20,
-        alignItems: 'center',
-        marginTop: 50,
-        justifyContent: 'center',
+        flexDirection: 'row',
     },
 });
