@@ -36,8 +36,13 @@ export default class CustomSidebarMenu extends Component {
             },
             {
                 navOptionThumb: 'apps',
-                navOptionName: 'Top',
+                navOptionName: 'Top Anime ',
                 screenToNavigate: 'NavScreen6',
+            },
+            {
+                navOptionThumb: 'apps',
+                navOptionName: 'Top Manga',
+                screenToNavigate: 'NavScreen9',
             },
             {
                 navOptionThumb: 'book',

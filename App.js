@@ -32,6 +32,7 @@ import Screen5 from './pages/Screen5';
 import Screen6 from './pages/Screen6';
 import Screen7 from './pages/Screen7';
 import Screen8 from './pages/Screen8';
+import Screen9 from './pages/Screen9';
 import Genre from './pages/components/Genre';
 import Production from './pages/components/Production';
 
@@ -157,6 +158,21 @@ const Screen7_StackNavigator = createStackNavigator({
     }),
   },
 });
+//Stack Navigator for the Seventh Option of Navigation Drawer
+const Screen9_StackNavigator = createStackNavigator({
+  //All the screen from the Fourth Option will be indexed here
+  First: {
+    screen: Screen9,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Top 30 Manga',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
 //Stack Navigator for the Fifth Option of Navigation Drawer
 const Screen5_StackNavigator = createStackNavigator({
   //All the screen from the Fifth Option will be indexed here
@@ -261,6 +277,12 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Screen8_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Producer',
+      },
+    },
+    NavScreen9: {
+      screen: Screen9_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Manga',
       },
     },
   },
