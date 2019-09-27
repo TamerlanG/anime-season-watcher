@@ -31,7 +31,10 @@ import Screen4 from './pages/Screen4';
 import Screen5 from './pages/Screen5';
 import Screen6 from './pages/Screen6';
 import Screen7 from './pages/Screen7';
+import Screen8 from './pages/Screen8';
 import Genre from './pages/components/Genre';
+import Production from './pages/components/Production';
+
 
 //Import Custom Sidebar
 import CustomSidebarMenu from './CustomSideBarMenu';
@@ -142,7 +145,7 @@ const Screen6_StackNavigator = createStackNavigator({
 //Stack Navigator for the Seventh Option of Navigation Drawer
 const Screen7_StackNavigator = createStackNavigator({
   //All the screen from the Fourth Option will be indexed here
-  Fourth: {
+  First: {
     screen: Screen7,
     navigationOptions: ({ navigation }) => ({
       title: 'Search Anime',
@@ -180,6 +183,32 @@ const Screen5_StackNavigator = createStackNavigator({
     }),
   }
 
+});
+
+//Stack Navigator for the Seventh Option of Navigation Drawer
+const Screen8_StackNavigator = createStackNavigator({
+  //All the screen from the Fourth Option will be indexed here
+  First: {
+    screen: Screen8,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Producer List',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  Second: {
+    screen: Production,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
 });
 
 //Drawer Navigator Which will provide the structure of our App
@@ -226,6 +255,12 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Screen7_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Search',
+      },
+    },
+    NavScreen8: {
+      screen: Screen8_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Producer',
       },
     },
   },
