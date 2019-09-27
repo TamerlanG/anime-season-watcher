@@ -88,7 +88,8 @@ export default class Screen1 extends Component {
                                         end={show.end_date}
                                         score={show.score}
                                         episodes={show.episodes}
-                                        airing={this.props.airing}
+                                        airing={show.airing}
+                                        url={show.url}
                                     />
                                 </View>
                             )

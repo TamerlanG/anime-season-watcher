@@ -103,6 +103,7 @@ export default class Screen3 extends Component {
                                 image={show.image_url}
                                 description={show.synopsis}
                                 date={show.airing_start}
+                                url={show.url}
                             />
                         </View>
                     )

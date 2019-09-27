@@ -1,10 +1,21 @@
 import React from 'react'
-import { View, Text, Image, ShadowPropTypesIOS } from 'react-native'
+import { View, Text, Image, Linking } from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import moment from "moment";
 
 
 const SearchAnimeCard = (props) => {
+
+    handleClick = () => {
+        Linking.canOpenURL(props.url).then(supported => {
+            if (supported) {
+                Linking.openURL(props.url);
+            } else {
+                console.log("Don't know how to open URI: " + this.props.url);
+            }
+        });
+    };
+
     const startDate = moment(props.start).format("MMMM Do YYYY");
     const endDate = moment(props.end).format("MMMM Do YYYY")
     return (
@@ -32,7 +43,9 @@ const SearchAnimeCard = (props) => {
             <Button
                 icon={<Icon name='code' color='#ffffff' />}
                 buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                title='VIEW NOW' />
+                title='VIEW NOW'
+                onPress={this.handleClick}
+            />
         </Card>
     )
 }

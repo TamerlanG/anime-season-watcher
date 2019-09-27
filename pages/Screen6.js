@@ -56,6 +56,7 @@ export default class Screen6 extends Component {
                                 end={show.end_date}
                                 score={show.score}
                                 type={show.type}
+                                url={show.url}
                             />
                         </View>
                     )

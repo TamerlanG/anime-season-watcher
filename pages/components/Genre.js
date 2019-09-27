@@ -86,6 +86,7 @@ export default class Genre extends Component {
                                 image={show.image_url}
                                 description={show.synopsis}
                                 date={show.airing_start}
+                                url={show.url}
                             />
                         </View>
                     )

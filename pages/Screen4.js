@@ -53,6 +53,7 @@ export default class Screen4 extends Component {
                                 image={show.image_url}
                                 description={show.synopsis}
                                 source={show.source}
+                                url={show.url}
                             />
                         </View>
                     )
