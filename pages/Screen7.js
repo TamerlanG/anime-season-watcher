@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Spinner from "./components/Spinner"
-import AnimeCard from "./components/AnimeCard";
+import SearchAnimeCard from "./components/SearchAnimeCard";
 
 
 let SEARCH_ANIME_RESULTS = "";
@@ -53,46 +53,11 @@ export default class Screen1 extends Component {
     }
 
     renderAnime = () => {
-        const todayDay = this.getDate();
-        return (
-            <ScrollView styles={styles.MainContainer}>
-                {this.state.anime[todayDay].map((show, i) => {
-                    return (
-                        <View key={i}>
-                            <AnimeCard
-                                title={show.title}
-                                image={show.image_url}
-                                description={show.synopsis}
-                                date={show.airing_start}
-                            />
-                        </View>
-                    )
-                })}
-            </ScrollView>
-        )
+
     }
 
 
     render() {
-        // return (
-        //     <View>
-        //         <SearchBar
-        //             placeholder="Type Here..."
-        //             onChangeText={(event) => {
-        //                 this.setState({
-        //                     search: event
-        //                 }, () => {
-        //                     SEARCH_ANIME_RESULTS = `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&page=1`
-        //                     fetchData();
-        //                 })
-        //             }}
-        //             value={this.state.search}
-        //             containerStyle={{ backgroundColor: '#42b883' }}
-        //             inputContainerStyle={{ backgroundColor: '#fff' }}
-        //         />
-        //     </View>
-        // )
-
         if (this.state.anime) {
             return (
                 <View>
@@ -111,7 +76,25 @@ export default class Screen1 extends Component {
                         inputContainerStyle={{ backgroundColor: '#fff' }}
                     />
 
-                    <Text>Results are here!!!</Text>
+                    <ScrollView styles={styles.MainContainer}>
+                        {this.state.anime.results.splice(0, 10).map((show, i) => {
+                            return (
+                                <View key={i}>
+                                    <SearchAnimeCard
+                                        title={show.title}
+                                        image={show.image_url}
+                                        description={show.synopsis}
+                                        start={show.start_date}
+                                        end={show.end_date}
+                                        score={show.score}
+                                        episodes={show.episodes}
+                                        airing={this.props.airing}
+                                    />
+                                </View>
+                            )
+                        })}
+                    </ScrollView>
+
                 </View>
             )
         }
@@ -124,8 +107,10 @@ export default class Screen1 extends Component {
                             this.setState({
                                 search: event
                             }, () => {
-                                SEARCH_ANIME_RESULTS = `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&page=1`
-                                this.fetchData();
+                                setTimeout(() => {
+                                    SEARCH_ANIME_RESULTS = `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&page=1`
+                                    this.fetchData();
+                                }, 5000)
                             })
                         }}
                         value={this.state.search}
