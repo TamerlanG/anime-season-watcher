@@ -33,8 +33,10 @@ import Screen6 from './pages/Screen6';
 import Screen7 from './pages/Screen7';
 import Screen8 from './pages/Screen8';
 import Screen9 from './pages/Screen9';
+import Screen10 from './pages/Screen10';
 import Genre from './pages/components/Genre';
 import Production from './pages/components/Production';
+import Magazine from "./pages/components/Magazine";
 
 
 //Import Custom Sidebar
@@ -226,6 +228,31 @@ const Screen8_StackNavigator = createStackNavigator({
     }),
   },
 });
+//Stack Navigator for the 10th Option of Navigation Drawer
+const Screen10_StackNavigator = createStackNavigator({
+  //All the screen from the 10th Option will be indexed here
+  First: {
+    screen: Screen10,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Magazine List',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  Second: {
+    screen: Magazine,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#42b883',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
 
 //Drawer Navigator Which will provide the structure of our App
 const DrawerNavigatorExample = createDrawerNavigator(
@@ -283,6 +310,12 @@ const DrawerNavigatorExample = createDrawerNavigator(
       screen: Screen9_StackNavigator,
       navigationOptions: {
         drawerLabel: 'Manga',
+      },
+    },
+    NavScreen10: {
+      screen: Screen10_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Magazine',
       },
     },
   },
